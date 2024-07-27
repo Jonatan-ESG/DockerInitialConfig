@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+    database:
+        container_name: mssql-db
+        hostname: mssql-db
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        ports:
+            - '1400:1433'
+        environment:
+            ACCEPT_EULA: 'Y'
+            MSSQL_SA_PASSWORD: 'S2V@Cs2JOWgQ'
+        volumes:
+            - db:/var/opt/mssql
+        networks:
+            - application_network
+    web:
+        container_name: aspnet_webserver
+        image: aps_server
+        build: .
+        ports:
+            - '80:80'
+        networks:
+            - application_network
+volumes:
+    db:
+networks:
+    application_network:
+        driver: bridge
