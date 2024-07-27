@@ -15,7 +15,7 @@ services:
             - application_network
     web:
         container_name: aspnet_webserver
-        image: aps_server
+        image: asp_server
         build: .
         ports:
             - '80:80'
